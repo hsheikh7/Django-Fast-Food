@@ -25,7 +25,7 @@ class ContactAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
     list_display = ('name', 'email', 'created_date') 
     list_filter = ('email',)
-    search_fields = ('name', 'email', 'massage')
+    search_fields = ('name', 'email', 'message')
 
 admin.site.register(Contact, ContactAdmin)
 

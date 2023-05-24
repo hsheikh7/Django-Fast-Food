@@ -47,9 +47,9 @@ class Order(models.Model):
     
 class Contact(models.Model):
     name = models.CharField(max_length=255)
+    family_name = models.CharField(max_length=255, blank = True , null=True)
     email = models.EmailField()
-    subject = models.CharField(max_length=255 , blank = True , null=True)
-    massage = models.TextField()
+    message = models.TextField()
     created_date = models.DateTimeField(auto_now_add= True)
     update_date = models.DateTimeField(auto_now= True)
 
