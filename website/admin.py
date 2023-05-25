@@ -7,9 +7,9 @@ from website.models import Contact
 
 class MenuAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
-    list_display = ('food_name', 'name_farsi' , 'price', 'created_date') 
-    list_filter = ('food_name',)
-    search_fields = ('food_name', 'price', )
+    list_display = ('name', 'name_farsi' , 'price', 'created_date') 
+    list_filter = ('name',)
+    search_fields = ('name', 'price', )
 
 admin.site.register(Menu, MenuAdmin)
 
@@ -17,7 +17,7 @@ class OrderAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
     list_display = ('created_date',) 
     list_filter = ('order_number',)
-    search_fields = ('food_name', 'price', )
+    search_fields = ('name', 'price', )
 
 admin.site.register(Order, OrderAdmin)
 

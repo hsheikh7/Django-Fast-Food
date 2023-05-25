@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Menu(models.Model):
-    food_name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     name_farsi = models.CharField(max_length=255)
+    type = models.CharField(max_length=255)
     image = models.ImageField( upload_to= 'img/', default= 'food/default.jpg')
     price = models.BigIntegerField()
     description = models.TextField(blank = True , null=True)
@@ -16,7 +17,7 @@ class Menu(models.Model):
         ordering = ('created_date',) 
         
     def __str__(self):
-        return self.food_name 
+        return self.name 
 
 # class Customer(models.Model):
 #     name = models.CharField(max_length=255)
