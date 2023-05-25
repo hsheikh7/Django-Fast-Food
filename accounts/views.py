@@ -45,8 +45,8 @@ def login_view(request):
 
 @login_required
 def logout_view(request):
-    logout(request)
-    return redirect('/13')
+    logout(request) 
+    return redirect('/')
 
 def signup_view(request):
     if not request.user.is_authenticated:

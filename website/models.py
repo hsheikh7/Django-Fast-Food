@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 class Menu(models.Model):
     food_name = models.CharField(max_length=255)
+    name_farsi = models.CharField(max_length=255)
+    image = models.ImageField( upload_to= 'img/', default= 'food/default.jpg')
     price = models.BigIntegerField()
     description = models.TextField(blank = True , null=True)
     created_date = models.DateTimeField(auto_now_add= True)

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from website.models import Menu
 from website.forms import ContactForm
 from django.contrib import messages
 
@@ -16,14 +17,19 @@ def index_view(request):
         form = ContactForm(request.POST)
         # if form.is_valid():
         form.save()
-    return render(request, 'index.html')
+    
+    menu = Menu.objects.order_by('-price')
+    context = {'menu': menu}
+
+    return render(request, 'index.html', context)
 
 def about_view(request):
-    print("Gorbe_About")
     return render(request, 'about.html')
 
 def menu_view(request):
-    return render(request, 'menu.html')
+    menu = Menu.objects.order_by('-price')
+    context = {'menu': menu}
+    return render(request, 'menu.html', context)
 
 # def contact_view(request):
 #     print("Gorbe")
