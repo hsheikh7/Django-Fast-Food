@@ -1,33 +1,6 @@
-{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
-
-<div class="container-xxl py-5 bg-dark hero-header mb-5">
-    <div class="container my-5 py-5">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6 text-center text-lg-start">
-                <h1 class="display-3 text-white animated slideInLeft">اولین مجموعه<br>غذاهای چینی در کرمان
-                </h1>
-                <p class="text-white animated slideInLeft mb-4 pb-2">طبخ انواع غذاهای چینی با ذائقه ایرانی
-                </p>
-                <a href="login.html" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">ورود / ثبت
-                    نام</a>
-            </div>
-            <div class="col-lg-6 text-center text-lg-end overflow-hidden">
-                <img class="img-fluid" src="{% static 'img/111.png' %}" alt="Loading...">
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- Navbar -->
-
-{% include 'about_content.html' %}
-
-
-
-<!-- Menu  -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="tab-class text-center wow ">
@@ -62,7 +35,7 @@
                             <div class="col-10 col-sm-6 col-lg-4 mx-auto my-3 store-item cupcakes" data-item="cupcakes">
                                 <div class="card ">
                                     <div class="img-container">
-                                        <img src="{% static '/img/سوشی سبزیجات.jpg' %}" class="card-img-top store-img"
+                                        <img src="{% static 'img/سوشی سبزیجات.jpg' %}" class="card-img-top store-img"
                                             alt="">
                                         <span class="store-item-icon">
                                             <i class="fas fa-shopping-cart"></i>
@@ -422,6 +395,8 @@
                 </div>
                 <div id="tab-2" class="tab-pane  p-0">
                     <div class="row g-4">
+
+                        <!-- Menu Start -->
                         <div class="row" class="store-items" id="store-items">
 
                             <!-- single item -->
@@ -542,16 +517,11 @@
                             </div>
                             <!--end of single store item-->
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Menu End -->
-
-
-{% include 'contact.html' %}
-
-
 {% endblock %}
