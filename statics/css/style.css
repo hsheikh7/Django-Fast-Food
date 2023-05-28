@@ -306,7 +306,7 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(15, 23, 43, 0.715), rgba(15, 23, 43, 0.699)), url(../static/img/BACK.jpg);
+    background: linear-gradient(rgba(15, 23, 43, 0.715), rgba(15, 23, 43, 0.699)), url(../img/BACK.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

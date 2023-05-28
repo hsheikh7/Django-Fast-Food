@@ -14,23 +14,24 @@ from zeep import Client
 
 # Create your views here.
 def index_view(request):
-    if request.method == 'POST':
-        
-        name = request.POST.get('name')
-        family_name = request.POST.get('family_name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
-        print(name, family_name, email)
-
-        form = ContactForm(request.POST)
-        # if form.is_valid():
-        form.save()
-    
     menu = Menu.objects.filter(type = "food").order_by('-price')
     menu_drink = Menu.objects.filter(type = "drink").order_by('-price')
     context = {'menu': menu, 'menu_drink': menu_drink}
 
     return render(request, 'index.html', context)
+
+def contact_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        family_name = request.POST.get('family_name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+    
+    return render(request, 'index.html')
 
 def about_view(request):
     return render(request, 'about.html')
@@ -42,22 +43,7 @@ def menu_view(request):
     
     return render(request, 'menu.html', context)
 
-# def contact_view(request):
-#     print("Gorbe")
-#     if request.method == 'POST':
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.add_message(request, messages.SUCCESS, 'Your Ticket Submited Successfully. Thank You!')
-#         else: 
-#             messages.add_message(request, messages.ERROR, 'Ooops! Your Ticket Didnt Submit.')
-    
-#     return render(request, 'index.html', {})  
-        # form = ContactForm() 
-    # return render(request, 'index.html', {'form': form})
-
 def test_view(request):
-
     return render(request, 'test.html', {})
 
 
@@ -82,7 +68,7 @@ def checkout(request):
         # order.save()
         cart.clear()
         return render(request, 'order_detail.html', {'order': order})
-    return render(request, 'checkout.html', {'cart': cart})
+    return render(request, 'about.html', {'cart': cart})
 
 
 def product(request, pk):

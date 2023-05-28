@@ -1,23 +1,26 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
-
+from django.http import HttpResponse
 from cart2.forms import CartAddProductForm
 from .cart import Cart
 from website.models import Menu
-
+from django.http import HttpResponseRedirect
 
 #@require_POST
 def cart_add(requset, product_id):
     cart = Cart(requset)
     product = get_object_or_404(Menu, id=product_id)
     cart.add(product=product)
+    # return HttpResponse('')
     return redirect('/')
 
 def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Menu, id=product_id)
-    cart.remove(product)
+    cart.remove(product_id)
+    print(product.name, product.price, product)
     return redirect('/')
+
 
 def cart_clear(request):
     cart = Cart(request)

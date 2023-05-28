@@ -9,10 +9,15 @@
 </head>
 
 <body>
+  <h1>از خرید شما متشکریم. </h1>
 <h1> بفرمائید فاکتور نهایی </h1>
   <h2> نام و نام خانوادگی</h2>
   <h2> فاکتور</h2>
   <h2>نشانی</h2>
+  <p> تخمین زمان آماده‌سازی: 20 دقیقه </p>
+  <p>Your order id: {{ order.id }} </p>
+  
+  <a href="{% url 'website:to_bank' order.id %}" class="btn btn-outline-secondary text-uppercase btn-pink"> پرداخت صورتحساب</a>
 
 </body>
 
