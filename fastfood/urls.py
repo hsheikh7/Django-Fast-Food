@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-
+# from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('website.urls')),    
     path('', include('accounts.urls')),
+    path('cart2/', include('cart2.urls')),
+    path('accounts/', include('allauth.urls')),
 
 ]
 

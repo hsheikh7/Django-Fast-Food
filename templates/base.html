@@ -60,7 +60,7 @@
                         <a href="{% url 'website:index' %}" class="nav-item nav-link">صفحه اصلی</a>
                         <a href="{% url 'website:about' %}" class="nav-item nav-link active">درباره ما</a>
                         <a href="{% url 'website:menu' %}" class="nav-item nav-link ">منوی غذا </a>
-                        {% if request.user.is_authenticated  %}
+                        {% if request.user.is_authenticated %}
                         <a href="{% url 'accounts:logout' %}" class="nav-item nav-link">خروج از حساب کاربری</a>
                         {% else %}
                         <a href="{% url 'accounts:login' %}" class="nav-item nav-link">ورود / ثبت نام</a>
@@ -77,35 +77,59 @@
                     </a>
                 </div>
                 <div id="cart" class="cart" dir="ltr">
+
+
+
                     <!-- cart item -->
+
+                    {% for item in cart %}
                     <div class="cart-item d-flex justify-content-between text-capitalize my-3">
-                        <img src="/{% static '/img/سوشی سبزیجات.jpg' %}" class="img-fluid02 rounded-circle"
-                            id="item-img" alt="">
+
                         <div class="item-text">
-                            <p id="cart-item-title" class="font-weight-bold mb-0" dir="rtl">سوشی سبزیجات</p>
-                            <span id="cart-item-price" class="cart-item-price" class="mb-0">145000</span>
+                            <p id="cart-item-title" class="font-weight-bold mb-0" dir="rtl">{{ item.product_count }} - {{ item.product.name_farsi }}</p>
+                            <span id="cart-item-price" class="cart-item-price" class="mb-0">{{item.price|floatformat:"0" }}</span>
                             <span>تومان</span>
                         </div>
+
                         <a href="#" id='cart-item-remove' class="cart-item-remove">
                             <i class="fas fa-trash"></i>
+
                         </a>
                     </div>
+                    {% endfor %}
+
+                    {% with total_items=cart|length %}
+                    {% if total_items > 0 %}
+                    
                     <div class="cart-total-container d-flex justify-content-around text-capitalize mt-5" dir="ltr">
                         <h5>مجموع</h5>
-                        <h5 dir="lt
-                    "> <strong id="cart-total" class="font-weight-bold">145000</strong> تومان</h5>
+                        <h5 dir="lt"> <strong id="cart-total" class="font-weight-bold">
+                                {{ cart.get_total_price|floatformat:"0" }}
+
+                            </strong> تومان</h5>
                     </div>
                     <div class="cart-buttons-container mt-3 d-flex justify-content-between">
-                        <a href="#" id="clear-cart" class="btn btn-outline-secondary btn-black text-uppercase">پاک کردن
-                            همه</a>
+                        <a href="{% url 'cart2:cart_clear' %}" id="clear-cart"
+                            class="btn btn-outline-secondary btn-black text-uppercase">پاک کردن همه</a>
+
+                            
+
+
                         <a href="#" class="btn btn-outline-secondary text-uppercase btn-pink">ثبت سفارش</a>
                     </div>
-            </nav>
-            
+                    {% else %}
+                    <p> هنوز چیزی انتخاب نکرده‌اید</p>
 
-           
+                    {% endif %}
+                    {% endwith %}
+
+
+
+            </nav>
+
 
         </div>
+
         <!-- Navbar -->
 
         {% block content %}
