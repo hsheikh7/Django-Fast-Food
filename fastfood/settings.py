@@ -144,7 +144,7 @@ STATICFILES_DIRS = [
 CART_SESSION_ID = 'cart'
 
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/login/'
+LOGIN_URL = '/login'
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`

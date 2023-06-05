@@ -6,7 +6,6 @@ from django.urls import reverse
 
 # Create your views here.
 def login_view(request):
-    print("Gorbe0")
     if not request.user.is_authenticated: 
         if request.method == 'POST':
             form = AuthenticationForm(request=request, data=request.POST)
@@ -15,12 +14,10 @@ def login_view(request):
                 password = form.cleaned_data.get('password')
                 
                 user = authenticate(request, username=username, password=password)
-                print("Gorbe1")
                 if user is not None: 
                     login(request, user)
-                    print("Gorbe2")
                     return  redirect('/')
-        print("Gorbe3")
+        
     else: 
         return  redirect('/')
     return render(request,'login.html')

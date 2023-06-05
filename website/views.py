@@ -64,11 +64,12 @@ def checkout(request):
                                             product_price=item['price'],
                                             product_count=item['product_count'],
                                             product_cost=Decimal(item['product_count']) * Decimal(item['price']))
+            
         # order.customer = request.user
         # order.save()
         cart.clear()
         return render(request, 'order_detail.html', {'order': order})
-    return render(request, 'about.html', {'cart': cart})
+    return render(request, '/', {'cart': cart})
 
 
 def product(request, pk):
@@ -86,8 +87,21 @@ merchant = '******************************'
 client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
 
 
-def to_bank(request, order_id):
-    order = get_object_or_404(models.Order, id=order_id)
+def to_bank(request):
+    cart = Cart(request)
+    if request.method == 'POST':
+        order = models.Order.objects.create(customer=request.user)
+        for item in cart:
+            models.OrderItem.objects.create(order=order,
+                                            product=item['product'],
+                                            product_price=item['price'],
+                                            product_count=item['product_count'],
+                                            product_cost=Decimal(item['product_count']) * Decimal(item['price']))
+            
+        # order.customer = request.user
+        # order.save()
+        cart.clear()
+        
     amount = 0
     order_items = models.OrderItem.objects.filter(order=order)
     for item in order_items:

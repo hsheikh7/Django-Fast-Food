@@ -37,14 +37,12 @@
                             <div class="col-10 col-sm-6 col-lg-4 mx-auto my-3 store-item cupcakes" data-item="cupcakes">
                                 <div class="card ">
                                     <div class="img-container">
-
-                                        <img src="{{food.image.url}}" class="card-img-top store-img" alt="">
+                                        <a href="{% url 'cart2:cart_add' food.id %}"><img src="{{food.image.url}}"
+                                                class="card-img-top store-img" alt="">
+                                        </a>
                                         <span class="store-item-icon">
-
                                             <i class="fas fa-shopping-cart"></i>
                                             <a href="{% url 'cart2:cart_add' food.id %}" method="post">انتخاب</a>
-                                            
-
                                         </span>
                                     </div>
                                     <div class="card-body">

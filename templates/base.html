@@ -119,7 +119,7 @@
 
 
 
-                            <form action="{% url 'website:checkout' %}" method="post">
+                            <form action="{% url 'website:to_bank' %}" method="post">
                                 {% csrf_token %}
                             <input type="submit" value="ثبت سفارش" class="btn btn-outline-secondary text-uppercase btn-pink">
                             </form>

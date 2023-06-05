@@ -37,7 +37,11 @@
                                 <div class="row g-4 wow fadeInUp" data-wow-delay="0.2s">
                                     <div class="col-4"></div>
                                     <div class="col-4">
+                                        {% if next %}
+                                        <form method="post" action="{% url 'accounts:login' %}/?next={{next}}">
+                                        {% else %}
                                         <form method="post" action="{% url 'accounts:login' %}">
+                                        {% endif %}
                                             {% csrf_token %}
                                             <div class="row g-3">
                                                 <div class="col-6">
