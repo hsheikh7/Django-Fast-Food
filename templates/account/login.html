@@ -42,22 +42,20 @@
                                         {% if next %}
                                         <form method="post" action="{% url 'account_login' %}/?next={{next}}">
                                             {% else %}
-                                            <form method="post" action="{% url 'account_login' %}">
+                                            <form method="post" action="{% url 'accounts:login' %}">
                                                 {% endif %}
                                                 {% csrf_token %}
                                                 <div class="row g-3">
                                                     <div class="col-6">
                                                         <div class="form-floating">
-                                                            <input name="login" type="text" class="form-control"
-                                                                value="{{ from.login.value }}" required autofocus
-                                                                placeholder="user-name">
+                                                            <input name="username" type="text" class="form-control"
+                                                                required autofocus placeholder="user-name">
                                                             <label for="text">نام کاربری</label>
-
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="form-floating">
-                                                            <input name="password" type="password" class="form-control"
+                                                            <input name="password" type="password" class="form-control" 
                                                                 required placeholder="password"></input>
                                                             <label for="password">رمز عبور</label>
                                                         </div>
@@ -72,17 +70,18 @@
                                     <div class="col-4"></div>
                                 </div>
                             </div>
+                            </br>
+                            {% include 'account/forget_password.html' %}
+
+
                         </div>
                         <!--    پایان فرم ورود       -->
                     </div>
                 </div>
 
 
-
-
                 <div id="tab-2" class="tab-pane fade show p-0">
                     <div class="row g-4">
-
                         <!--     فرم ثبت نام    -->
                         <div class="container-xxl py-5">
                             <div class="container">

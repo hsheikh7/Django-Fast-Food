@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from cart2.cart import Cart
 from decimal import Decimal
 from zeep import Client
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
 # Create your views here.
 def index_view(request):
@@ -137,3 +139,33 @@ def callback(request):
             return HttpResponse('error ' + str(result.Status))
     else:
         return HttpResponse('error ')
+
+
+def forgot_password_view(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return render(request, 'account/forgot_password.html', {'error': 'No user found with that email address.'})
+
+        # Generate a new password
+        new_password = User.objects.make_random_password()
+
+        # Set the new password for the user
+        user.set_password(new_password)
+        user.save()
+
+        # Send an email with the new password
+        send_mail(
+            'Password Reset',
+            f'Your new password is: {new_password}',
+            'hassan.sheikh85@gmail.com',  # Replace with your email address
+            [email],
+            fail_silently=False,
+        )
+
+        return redirect('login')  # Replace 'login' with the name of your login URL pattern
+
+    return render(request, 'account/forgot_password.html')

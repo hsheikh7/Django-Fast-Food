@@ -15,6 +15,7 @@ urlpatterns = [
     path('index.html', contact_view, name = 'contact'), 
     
     path('login', login_view, name='login' ),
+    path('forget_password', forgot_password_view, name='forget_password' ),
 
     path('to-bank/', views.to_bank, name='to_bank'),
     path('order_details', views.callback, name='order_details'),

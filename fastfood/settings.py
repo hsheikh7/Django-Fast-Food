@@ -182,9 +182,12 @@ SOCIALACCOUNT_PROVIDERS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'hasssan.sheikh85@gmail.com'
-EMAIL_HOST_PASSWORD = '*******************'
+EMAIL_HOST = 'smtp.gmail.com' # Replace with your SMTP email host
+EMAIL_USE_TLS = True # Set to True if your email host requires TLS
+EMAIL_PORT = 587 # Replace with the port number for your email host
+EMAIL_HOST_USER = 'hasssan.sheikh85@gmail.com' # Replace with your SMTP email address
+EMAIL_HOST_PASSWORD = '*******************' # Replace with your SMTP email password
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 

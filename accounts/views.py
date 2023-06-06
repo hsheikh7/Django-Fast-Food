@@ -5,25 +5,32 @@ from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.contrib.auth.models import User 
+
 
 # Create your views here.
 
 # Create your views here.
 def login_view(request):
+    print("Gorbe0")
     if not request.user.is_authenticated:
+        print("Gorbe10")
         if request.method == 'POST':
             form = AuthenticationForm(request=request,data=request.POST)
+            print("Gorbe20")
             if form.is_valid():
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password')
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
                     login(request,user)
+                    print("Gorb3e0")
                     return redirect('/')
 
         form = AuthenticationForm()
         context = {'form':form}
-        return render(request,'accounts/login.html',context)
+        print("Gorbe40")
+        return render(request,'account/login.html',context)
     else:
         return redirect('/')
 
@@ -31,8 +38,6 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
-
-from django.contrib.auth.models import User 
 
 def signup_view(request):
     if not request.user.is_authenticated:
