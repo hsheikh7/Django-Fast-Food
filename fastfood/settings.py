@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'website', 
-    'accounts', 
     'cart2', 
+    'accounts',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    
+
 ]
 
 
@@ -146,6 +146,12 @@ CART_SESSION_ID = 'cart'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
 
+# ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS =True
+LOGIN_REDIRECT_URL = "/"
+
+ACCOUNT_LOGOUT_ON_GET= True
+ACCOUNT_LOGOUT_REDIRECT_URL ="/"
+
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -179,5 +185,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'hasssan.sheikh@gmail.com'
+EMAIL_HOST_USER = 'hasssan.sheikh85@gmail.com'
 EMAIL_HOST_PASSWORD = '*******************'
+

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load account %}
 {% load static %}
 {% block content %}
+
 
 <div class="container-xxl py-5 bg-dark hero-header mb-5">
     <div class="container text-center my-5 pt-5 pb-4">
@@ -38,33 +40,34 @@
                                     <div class="col-4"></div>
                                     <div class="col-4">
                                         {% if next %}
-                                        <form method="post" action="{% url 'accounts:login' %}/?next={{next}}">
-                                        {% else %}
-                                        <form method="post" action="{% url 'accounts:login' %}">
-                                        {% endif %}
-                                            {% csrf_token %}
-                                            <div class="row g-3">
-                                                <div class="col-6">
-                                                    <div class="form-floating">
-                                                        <input name="username" type="text" class="form-control"
-                                                            placeholder="user-name">
-                                                        <label for="text">نام کاربری</label>
+                                        <form method="post" action="{% url 'account_login' %}/?next={{next}}">
+                                            {% else %}
+                                            <form method="post" action="{% url 'account_login' %}">
+                                                {% endif %}
+                                                {% csrf_token %}
+                                                <div class="row g-3">
+                                                    <div class="col-6">
+                                                        <div class="form-floating">
+                                                            <input name="login" type="text" class="form-control"
+                                                                value="{{ from.login.value }}" required autofocus
+                                                                placeholder="user-name">
+                                                            <label for="text">نام کاربری</label>
 
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-floating">
+                                                            <input name="password" type="password" class="form-control"
+                                                                required placeholder="password"></input>
+                                                            <label for="password">رمز عبور</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button class="btn btn-primary w-100 py-3" type="submit">ورود
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="form-floating">
-                                                        <input name="password" type="password" class="form-control"
-                                                            placeholder="password"></input>
-                                                        <label for="password">رمز عبور</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <button class="btn btn-primary w-100 py-3" type="submit">ورود
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
                                     </div>
                                     <div class="col-4"></div>
                                 </div>
@@ -86,40 +89,43 @@
                                 <div class="row g-4 wow fadeInUp" data-wow-delay="0.2s">
                                     <div class="col-4"></div>
                                     <div class="col-4">
-                                        <form>
+
+                                        <form method="post" action="{% url 'accounts:signup' %}">
+                                            {% csrf_token %}
                                             <div class="row g-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
                                                         <input type="text" class="form-control" id="name"
+                                                            name="first_name" id="id_first_name" required autofocus
                                                             placeholder="Name">
-                                                        <label for="name">نام </label>
+                                                        <label for="id_first_name">نام </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
                                                         <input type="text" class="form-control" id="last-name"
-                                                            placeholder="last-name">
+                                                            name="last_name" required placeholder="last-name">
                                                         <label for="text">نام خانوادگی</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-floating">
                                                         <input type="text" class="form-control" placeholder="uesr-name"
-                                                            id="user-name"></input>
+                                                            name="username" required id="user-name"></input>
                                                         <label for="text">نام کاربری</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-floating">
-                                                        <input type="password" class="form-control"
-                                                            placeholder="password" id="password"></input>
+                                                        <input type="password" class="form-control" name="password"
+                                                            required placeholder="password"></input>
                                                         <label for="password">رمز عبور</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-floating">
-                                                        <input type="email" class="form-control" id="email"
-                                                            placeholder="email">
+                                                        <input type="email" class="form-control" id="email" name="email"
+                                                            required placeholder="email">
                                                         <label for="email">ایمیل</label>
                                                     </div>
                                                 </div>

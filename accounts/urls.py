@@ -1,17 +1,12 @@
 from django.urls import path 
-from . import views
-from accounts.views import *
+from . import views 
 
-app_name = 'accounts' 
+app_name = 'accounts'
 
 urlpatterns = [
-    # login
-    path('login', login_view, name='login'),
+    #singup 
+    # path('signup', views.sign_view, name = 'login')
+    path('signup', views.signup_view, name = 'signup')
 
-    # logout
-    path('logout',views.logout_view, name='logout'),
-    
-    # registration / signup
-    path('signup/',views.signup_view, name='signup')
-    
+
 ]

@@ -11,14 +11,22 @@ from cart2.cart import Cart
 from decimal import Decimal
 from zeep import Client
 
-
 # Create your views here.
 def index_view(request):
     menu = Menu.objects.filter(type = "food").order_by('-price')
     menu_drink = Menu.objects.filter(type = "drink").order_by('-price')
+    
     context = {'menu': menu, 'menu_drink': menu_drink}
 
     return render(request, 'index.html', context)
+
+def login_view(request):
+    return render(request, 'account/login.html')
+
+def order_details_view(request):
+    cart = Cart(request)
+
+    return render(request, 'order_details.html', {'cart': cart})
 
 def contact_view(request):
     if request.method == 'POST':
@@ -46,13 +54,6 @@ def menu_view(request):
 def test_view(request):
     return render(request, 'test.html', {})
 
-
-
-# def index(request):
-#     product_list = models.Product.objects.all()[:5]
-#     return render(request, 'index.html', {'product_list': product_list})
-
-
 @login_required
 def checkout(request):
     cart = Cart(request)
@@ -74,20 +75,19 @@ def checkout(request):
 
 def product(request, pk):
     product_detail = get_object_or_404(models.Product, id=pk)
-    #cart_add_product_form = CartAddProductForm()
-    return render(request, 'product.html', {'product_detail': product_detail,
-                                            'cart_add_product_form': cart_add_product_form})
+    return render(request, 'product.html', {'product_detail': product_detail})
 
 
 def store(request):
     return render(request, 'store.html')
 
 
-merchant = '******************************'
+merchant = '********-****-****-****-************'
 client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
 
-
+@login_required
 def to_bank(request):
+    #checkout 
     cart = Cart(request)
     if request.method == 'POST':
         order = models.Order.objects.create(customer=request.user)
@@ -101,7 +101,8 @@ def to_bank(request):
         # order.customer = request.user
         # order.save()
         cart.clear()
-        
+
+    #to_bank     
     amount = 0
     order_items = models.OrderItem.objects.filter(order=order)
     for item in order_items:
@@ -131,7 +132,7 @@ def callback(request):
             amount += item.product_cost
         result = client.service.PaymentVerification(merchant, authority, amount)
         if result.Status == 100:
-            return render(request, 'callback.html', {'invoice': invoice})
+            return render(request, 'order_details', {'invoice': invoice})
         else:
             return HttpResponse('error ' + str(result.Status))
     else:

@@ -2,6 +2,7 @@ from django.urls import path
 from website.views import *
 from . import views
 from django.contrib.auth import views as auth_views
+from allauth.account.views import LoginView, SignupView 
 
 
 app_name = 'website'
@@ -11,15 +12,14 @@ urlpatterns = [
     path('', index_view, name = 'index'), 
     path('menu.html', menu_view, name = 'menu'), 
     path('about', about_view, name = 'about'),
-    
     path('index.html', contact_view, name = 'contact'), 
-    #path('checkout/', views.checkout, name='checkout'),
-    path('product/<int:pk>/', views.product, name='product'),
-    path('store/', views.store, name='store'),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
+    
+    path('login', login_view, name='login' ),
+
     path('to-bank/', views.to_bank, name='to_bank'),
-    #path('to-bank/<int:order_id>/', views.to_bank, name='to_bank'),
-    path('callback/', views.callback, name='callback'),
+    path('order_details', views.callback, name='order_details'),
+    
+    path('order_details2', order_details_view, name='order_details2'),
     
     path('test', test_view, name = 'test'),
 ]
